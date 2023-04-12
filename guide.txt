@@ -1,0 +1,79 @@
+# Fext-Next-Number-Api
+
+This is a sample Spring Boot application that provides an API to fetch the next number for a given category code.
+It also provides an API to check if the digit sum of a number is equal to one.
+
+## Getting Started
+
+### Prerequisites
+
+Before running the application, you need to have the following installed:
+
+- JDK 11 or higher
+- Maven 3.6 or higher
+
+### Installing
+
+A step by step series of examples that tell you how to get a development
+environment running
+
+Clone the repository or download the source code from :
+
+    git clone https://github.com/asliutkarsh/FextNextNumber.git
+
+Navigate to the project directory:
+
+    cd FextNextNumber
+
+Build the project:
+
+    mvn clean install
+
+Run the application:
+
+    mvn spring-boot:run
+
+## Usage
+
+### Fetching the Next Number
+
+To fetch the next number for a given category code, send a POST request to the /numbers endpoint with the following request body:
+
+    {
+        "categoryCode": "test"
+    }
+
+Replace test with the category code for which you want to fetch the next number.
+
+The response will be a JSON object with the following structure:
+
+    {
+        "oldValue": 10L,
+        "newValue": 19L
+    }
+
+
+
+
+## Testing
+
+Run unit tests:
+
+    mvn test
+
+## Deployment
+
+To deploy the application, create a production-ready JAR file and run it on a server with Java installed:
+
+1. Build the project
+
+        mvn clean install
+2. Navigate to the target directory
+
+        cd target
+3. Run the JAR file
+
+           java -jar FextNextNumber.jar
+
+
+

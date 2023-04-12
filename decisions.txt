@@ -1,0 +1,24 @@
+Architecture:
+
+The application is designed using a layered architecture.
+
+The layers are:
+
+    1. Controller layer: Responsible for receiving HTTP requests and returning HTTP responses.
+    2. Service layer: Responsible for implementing business logic and interacting with repositories.
+    3. Repository layer: Responsible for interacting with the database.
+
+ORM Framework:
+
+ Data JPA was used as the ORM framework to interact with the database.
+
+Database:
+
+    A MySQL database was used to store the data.
+
+Unit Testing:
+
+    JUnit and Mockito are used for unit testing.
+
+
+
