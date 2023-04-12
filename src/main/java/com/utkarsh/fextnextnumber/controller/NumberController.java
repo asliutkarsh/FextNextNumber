@@ -3,7 +3,7 @@ package com.utkarsh.fextnextnumber.controller;
 import com.utkarsh.fextnextnumber.dto.CategoryCodeRequest;
 import com.utkarsh.fextnextnumber.dto.NumberResponse;
 import com.utkarsh.fextnextnumber.service.NumberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/FetchNextNumber")
+@RequiredArgsConstructor
 public class NumberController {
 
-    @Autowired
-    private NumberService numberService;
+    private final NumberService numberService;
 
     @PostMapping
-    public ResponseEntity<NumberResponse> fetchNextNumber(@RequestBody CategoryCodeRequest request) {
+    public ResponseEntity<NumberResponse> fetchNextNumber(@RequestBody CategoryCodeRequest request) throws InterruptedException {
         String categoryCode = request.getCategoryCode();
 
         NumberResponse numberResponse = numberService.fetchNextNumber(categoryCode);
