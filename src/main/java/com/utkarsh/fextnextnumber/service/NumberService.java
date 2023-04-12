@@ -4,5 +4,5 @@ import com.utkarsh.fextnextnumber.dto.NumberResponse;
 
 public interface NumberService {
 
-    NumberResponse fetchNextNumber(String categoryCode);
+    NumberResponse fetchNextNumber(String categoryCode) throws InterruptedException;
 }
