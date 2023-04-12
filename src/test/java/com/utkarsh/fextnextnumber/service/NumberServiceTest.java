@@ -47,7 +47,7 @@ class NumberServiceTest {
         Optional<NumberTable> optionalNumberEntity = Optional.of(new NumberTable(categoryCode, oldValue));
         NumberResponse expectedResponse = new NumberResponse(oldValue, newValue);
 
-        when(numberRepository.findFirstByCategoryCodeOrderByValueDesc(anyString())).thenReturn(optionalNumberEntity);
+        when(numberRepository.findByCategoryCode(anyString())).thenReturn(optionalNumberEntity);
 
         NumberResponse actualResponse = numberService.fetchNextNumber(categoryCode);
 
@@ -64,7 +64,7 @@ class NumberServiceTest {
         Optional<NumberTable> optionalNumberEntity = Optional.empty();
         NumberResponse expectedResponse = new NumberResponse(0L, newValue);
 
-        when(numberRepository.findFirstByCategoryCodeOrderByValueDesc(anyString())).thenReturn(optionalNumberEntity);
+        when(numberRepository.findByCategoryCode(anyString())).thenReturn(optionalNumberEntity);
 
         NumberResponse actualResponse = numberService.fetchNextNumber(categoryCode);
 

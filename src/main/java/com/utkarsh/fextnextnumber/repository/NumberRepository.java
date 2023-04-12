@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface NumberRepository extends JpaRepository<NumberTable,Long> {
 
-    Optional<NumberTable> findFirstByCategoryCodeOrderByValueDesc(String categoryCode);
+    Optional<NumberTable> findByCategoryCode(String categoryCode);
 }

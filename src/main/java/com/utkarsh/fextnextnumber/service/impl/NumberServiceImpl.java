@@ -17,14 +17,19 @@ public class NumberServiceImpl implements NumberService {
 
     @Override
     public NumberResponse fetchNextNumber(String categoryCode) throws InterruptedException {
-        Optional<NumberTable> optionalNumberEntity = numberRepository.findFirstByCategoryCodeOrderByValueDesc(categoryCode);
+        Optional<NumberTable> optionalNumberEntity = numberRepository.findByCategoryCode(categoryCode);
         Long fetchedValue = optionalNumberEntity.map(NumberTable::getValue).orElse(0L);
 
         Long nextValue = generateNextNumber(fetchedValue);
+        NumberTable nextNumber;
 
-        NumberTable nextNumber =  new NumberTable(categoryCode, nextValue);
-
-        numberRepository.save(nextNumber);
+        if (optionalNumberEntity.isEmpty()){
+            nextNumber =  new NumberTable(categoryCode, nextValue);
+            numberRepository.save(nextNumber);
+        }else {
+            nextNumber =  new NumberTable(optionalNumberEntity.get().getId(),categoryCode, nextValue);
+            numberRepository.save(nextNumber);
+        }
 
         Thread.sleep(5000);
 
@@ -32,9 +37,9 @@ public class NumberServiceImpl implements NumberService {
     }
 
     private Long generateNextNumber(Long fetchedValue) {
-        Long nextValue = fetchedValue + 1;
+        Long nextValue = fetchedValue + 1; //greater than the fetched Value
 
-        while (!isDigitSumEqualOne(nextValue)) {
+        while (!isDigitSumEqualOne(nextValue)) { //the number is the smallest next available number
             nextValue++;
         }
 
@@ -42,6 +47,10 @@ public class NumberServiceImpl implements NumberService {
     }
 
     private boolean isDigitSumEqualOne(Long value) {
+        //sum of the individual digits become 1 [for example if fetched number is 10, then
+        //the next number should be 19 as 1+9 = 10 => 1+0 = 1]
+
+
         if (value == 0) return false;
         if (value % 9 == 0) return false;
         return value % 9==1;
