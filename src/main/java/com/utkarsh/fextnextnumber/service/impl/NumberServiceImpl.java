@@ -22,10 +22,8 @@ public class NumberServiceImpl implements NumberService {
 
         Long nextValue = generateNextNumber(fetchedValue);
 
-        NumberTable nextNumber =  NumberTable.builder()
-                                        .categoryCode(categoryCode)
-                                        .value(nextValue)
-                                        .build();
+        NumberTable nextNumber =  new NumberTable(categoryCode, nextValue);
+
         numberRepository.save(nextNumber);
 
         Thread.sleep(5000);
@@ -44,10 +42,15 @@ public class NumberServiceImpl implements NumberService {
     }
 
     private boolean isDigitSumEqualOne(Long value) {
-        int sum = 0;
+        Long sum = 0L;
         while (value > 0) {
             sum += value % 10;
             value /= 10;
+
+            if (value ==0 && sum > 9){
+                value =sum;
+                sum = 0L;
+            }
         }
 
         return sum == 1;

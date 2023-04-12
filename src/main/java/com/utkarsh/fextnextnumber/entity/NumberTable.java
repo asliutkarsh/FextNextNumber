@@ -22,5 +22,8 @@ public class NumberTable {
     @Column(name = "value")
     private Long value;
 
-
+    public NumberTable(String categoryCode, Long value) {
+        this.categoryCode = categoryCode;
+        this.value = value;
+    }
 }
