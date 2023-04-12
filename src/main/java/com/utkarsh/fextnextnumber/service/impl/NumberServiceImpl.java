@@ -42,18 +42,9 @@ public class NumberServiceImpl implements NumberService {
     }
 
     private boolean isDigitSumEqualOne(Long value) {
-        Long sum = 0L;
-        while (value > 0) {
-            sum += value % 10;
-            value /= 10;
-
-            if (value ==0 && sum > 9){
-                value =sum;
-                sum = 0L;
-            }
-        }
-
-        return sum == 1;
+        if (value == 0) return false;
+        if (value % 9 == 0) return false;
+        return value % 9==1;
     }
 }
 
